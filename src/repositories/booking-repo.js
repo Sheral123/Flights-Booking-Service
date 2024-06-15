@@ -1,7 +1,10 @@
 const { StatusCodes} = require('http-status-codes');
-
+const {Sequelize, Op} = require('sequelize');
 const {Booking } = require('../models');
 const CrudRepo = require('./crud-repo');
+
+const {Enums} = require('../utills/common');
+const {BOOKED, CANCALLED} = Enums.BOOKING_STATUS;
 
 class BookingRepo extends CrudRepo{
     constructor() {
@@ -33,8 +36,29 @@ class BookingRepo extends CrudRepo{
         }
         return response
         
-    }    
+    }   
+    
+    async cancelOldBookings(timestamp){
+        const response= await Booking.update({status: CANCALLED},{
+            where: {
+                [Op.and]: [
+                    {
+                        createdAt: {
+                            [Op.lt]: timestamp
+                        }
+                    },
+                    {
+                        status:{
+                            [Op.ne]: BOOKED
+                        }
+                    }        
+                ]
+            }    
+    });
+        return response;
+    }
 }
+
 
 
 
