@@ -4,8 +4,7 @@ const {BookingService} = require('../../services');
 
 
 function scheduleCrons() {
-    cron.schedule('*/5 * * * * *',async () => {
-        console.log('ddf')
+    cron.schedule('*/10 * * * *',async () => {
         const response = await BookingService.cancelOldBookings();
         console.log('jjjj',response);
     });

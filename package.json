@@ -9,6 +9,10 @@
   "author": "Sanket",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "amqplib": "^0.10.4",
+>>>>>>> 0fe3a70 (added  notification service)
     "axios": "^1.7.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -18,6 +22,10 @@
     "nodemon": "^3.1.3",
     "sequelize": "^6.31.1",
     "sequelize-cli": "^6.6.0",
+<<<<<<< HEAD
+=======
+    "uuid": "^10.0.0",
+>>>>>>> 0fe3a70 (added  notification service)
     "winston": "^3.8.2"
   }
 }

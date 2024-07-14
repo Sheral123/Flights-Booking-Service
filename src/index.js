@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { ServerConfig } = require('./config');
+const { ServerConfig, Queue } = require('./config');
 const apiRoutes = require('./routes');
 const Crons = require('./utills/common/cron-job');
 
@@ -9,9 +9,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+/*app.use('bookingService/api', apiRoutes);*/
 app.use('/api', apiRoutes);
 
-app.listen(ServerConfig.PORT, () => {
+
+
+app.listen(ServerConfig.PORT, async () => {
     console.log(`Successfully started the server on PORT : ${ServerConfig.PORT}`);
     Crons();
+    await Queue.connectQueue();
+    console.log("queue connected");
 });
